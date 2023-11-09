@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useApp } from "./hooks/useApp";
 import "./App.css";
 
 function App() {
-  const [text, setText] = useState<string>("");
-  const [textLength, setTextLength] = useState<number>(text.length);
-
-  useEffect(() => {
-    setTextLength(text.length);
-  }, [text]);
-
-  // テキストボックスの値が変更されたときに呼び出される関数
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // textの値を更新
-    setText(e.target.value);
-  };
-
-  // テキストボックスと入力された値を表示
+  const {
+    state: { text, textLength },
+    handler: { handleTextChange },
+  } = useApp();
   return (
     <div className="App">
       <input
