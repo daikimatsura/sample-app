@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [text, setText] = useState<string>("");
+  const [textLength, setTextLength] = useState<number>(text.length);
 
-  const increment = () => {
-    setCount((prev) => prev + 1);
-  };
-  const decrement = () => {
-    setCount((prev) => prev - 1);
+  useEffect(() => {
+    setTextLength(text.length);
+  }, [text]);
+
+  // テキストボックスの値が変更されたときに呼び出される関数
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // textの値を更新
+    setText(e.target.value);
   };
 
+  // テキストボックスと入力された値を表示
   return (
     <div className="App">
-      <h1>Count: {count}</h1>
-      <button onClick={increment}>＋</button>
-      <button onClick={decrement}>ー</button>
+      <input
+        className="input"
+        type="text"
+        value={text}
+        onChange={(e) => handleTextChange(e)}
+      />
+      <div className="text">{`入力したテキスト: ${text}`}</div>
+      <div className="text">{`入力したテキストの文字数: ${textLength}`}</div>
     </div>
   );
 }

@@ -1,3 +1,18 @@
 .App {
   text-align: center;
+  margin-top: 25%;
+}
+
+.input {
+  width: 30%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+.text {
+  font-size: 16px;
+  margin-top: 2rem;
 }
