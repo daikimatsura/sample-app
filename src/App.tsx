@@ -1,11 +1,20 @@
-import { useApp } from "./hooks/useApp";
+import React, { useState, useMemo, useCallback } from "react";
 import "./App.css";
 
 function App() {
-  const {
-    state: { text, textLength },
-    handler: { handleTextChange },
-  } = useApp();
+  const [text, setText] = useState<string>("");
+  const textLength = useMemo(() => text.length, [text]);
+
+  // テキストボックスの値が変更されたときに呼び出される関数
+  const handleTextChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      // textの値を更新
+      setText(e.target.value);
+    },
+    []
+  );
+
+  // テキストボックスと入力された値を表示
   return (
     <div className="App">
       <input
