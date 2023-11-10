@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import "./App.css";
 
 function App() {
   const [text, setText] = useState<string>("");
-  const [textLength, setTextLength] = useState<number>(text.length);
-
-  useEffect(() => {
-    setTextLength(text.length);
-  }, [text]);
+  const textLength = useMemo(() => text.length, [text]);
 
   // テキストボックスの値が変更されたときに呼び出される関数
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // textの値を更新
-    setText(e.target.value);
-  };
+  const handleTextChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      // textの値を更新
+      setText(e.target.value);
+    },
+    []
+  );
 
   // テキストボックスと入力された値を表示
   return (
